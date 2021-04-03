@@ -13,6 +13,12 @@
     },
     "rules": {
         "no-undef":"error",
-        "no-const-assign":"error"
+        "no-const-assign":"error",
+        "no-param-reassign":"error",
+        "no-unused-vars": "warn",
+        "no-dupe-keys":"error",
+        "no-empty": ["warn", {
+            "allowEmpyCatch": true
+        }]
     }
 }
