@@ -1,13 +1,10 @@
-const http = require('http');
 const express = require('express');
-
-const PORT = process.env.PORT || 3000;
+const cryptoAPI = require('./crypto/cryptoRoutes');
 
 const app = express();
-const server = http.createServer(app);
 
-app.get('/', (req, res, next) => {
-    res.send('Hashmaker');
-});
+app.use(express.json());
 
-server.listen(PORT, ()=> console.log(`Server is running on http://localhost:${PORT}`));
+app.use('/hash', cryptoAPI);
+
+module.exports = app;
