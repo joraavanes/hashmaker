@@ -1,8 +1,8 @@
 client/node_modules
-server/node_modules
+node_modules
 node_modules
 yarn-error.log
 client/yarn-error.log
-server/yarn-error.log
+yarn-error.log
 client/public
-server/.env
+.env
