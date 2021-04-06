@@ -17,5 +17,19 @@ module.exports = {
         } catch (err) {
             return err.message;
         }
+    },
+    encrypt: function(algorithm, keyPassword, data){
+        try {
+            const key = crypto.scrypt(keyPassword, 'salt', 32);
+            const iv = crypto.randomBytes(16);
+
+            const cipher = crypto.createCipheriv(algorithm, key, iv);
+
+            let encryptedData = cipher.update(data, 'utf-8', 'hex');
+            encryptedData += cipher.final('hex');
+            return encryptedData;
+        } catch (err) {
+            return err.message;
+        }
     }
 };
