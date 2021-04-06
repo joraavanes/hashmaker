@@ -1,8 +1,8 @@
-client/node_modules
+reactApp/node_modules
+reactApp/yarn-error.log
+reactApp/public
 node_modules
 node_modules
 yarn-error.log
-client/yarn-error.log
 yarn-error.log
-client/public
 .env
