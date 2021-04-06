@@ -1,4 +1,4 @@
-const { createHash, PBKDF2 } = require('../lib/crypto');
+const { createHash, PBKDF2, encrypt } = require('../lib/crypto');
 
 module.exports = {
     generateHash: (req, res, next) => {
@@ -19,6 +19,16 @@ module.exports = {
             iterations,
             keylen,
             algorithm
+        });
+    },
+    encrypt: (req, res, next) => {
+        const {algorithm, keyPassword, data} = req.body;
+        const encryptedData = encrypt(algorithm, keyPassword, data);
+        res.send({
+            encryptedData,
+            algorithm,
+            keyPassword,
+            plainData: data
         });
     }
 };
