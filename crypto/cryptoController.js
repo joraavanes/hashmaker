@@ -23,11 +23,12 @@ module.exports = {
     },
     encrypt: (req, res, next) => {
         const {algorithm, keyPassword, data} = req.body;
-        const encryptedData = encrypt(algorithm, keyPassword, data);
+        const {encryptedData, key, iv} = encrypt(algorithm, keyPassword, data);
         res.send({
             encryptedData,
+            key,
+            iv,
             algorithm,
-            keyPassword,
             plainData: data
         });
     }
