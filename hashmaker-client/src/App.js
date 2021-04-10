@@ -1,16 +1,23 @@
 import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
+import Typography from '@material-ui/core/Typography'
+import Container from '@material-ui/core/Container'
 import Home from './components/Home'
 import Hash from './components/Hash'
 import Pbkdf2 from './components/Pbkdf2'
 import Encrypt from './components/Encrypt'
 import Decrypt from './components/Decrypt'
-import './App.css';
 
 function App() {
   return (
-    <div className="App">
+    <Container className="App">
       <header className="App-header">
-        <h1>Welcome to hashmaker</h1>
+        <Typography 
+          variant="h3"
+          align="center"
+          component="h2"
+          color="primary">
+          Welcome to Hashmaker
+        </Typography>
       </header>
       <Router>
         <Switch>
@@ -21,7 +28,7 @@ function App() {
           <Route path="/decrypt" component={Decrypt} exact/>
         </Switch>
       </Router>
-    </div>
+    </Container>
   );
 }
 
