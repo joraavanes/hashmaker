@@ -1,4 +1,4 @@
-import { Switch, BrowserRouter as Router, Route } from 'react-router-dom'
+import { Switch, BrowserRouter as Router, Route, NavLink, Link } from 'react-router-dom'
 import Typography from '@material-ui/core/Typography'
 import Container from '@material-ui/core/Container'
 import Home from './components/Home'
@@ -13,12 +13,14 @@ import LockIcon from '@material-ui/icons/Lock';
 import BorderClearIcon from '@material-ui/icons/BorderClear';
 import TrackChangesIcon from '@material-ui/icons/TrackChanges';
 import { makeStyles } from '@material-ui/core';
+import AppBar from './components/UI/ElevateAppBar'
 
 const useStyles = makeStyles(theme => ({
   alignCenter: {
       display: 'flex',
       flexDirection: 'row',
-      justifyContent: 'center'
+      justifyContent: 'center',
+      marginTop: 20
   }
 }));
 
@@ -27,22 +29,25 @@ function App() {
 
   return (
     <Container className="App">
-      <header className="App-header">
-        <Typography 
-          variant="h3"
-          align="center"
-          component="h2"
-          gutterBottom
-          color="primary">
-          Welcome to Hashmaker
-        </Typography>
+      <Router>
+        <AppBar/>
         <ButtonGroup className={classes.alignCenter}>
-                <Button type="button" color="secondary" variant="outlined">Home</Button>
+                <Button 
+                  type="button" 
+                  color="secondary" 
+                  variant="outlined"
+                  component={NavLink}
+                  to={'/'}
+                    >
+                    Home
+                  </Button>
                 <Button 
                     type="button" 
                     color="secondary" 
                     variant="outlined"
                     startIcon={<BorderClearIcon fontSize="small" color="secondary"/>}
+                    component={NavLink}
+                    to={'/hash'}
                     >
                     Hash
                 </Button>
@@ -50,27 +55,31 @@ function App() {
                     type="button" 
                     color="secondary" 
                     variant="outlined"
-                    startIcon={<TrackChangesIcon fontSize="small" color="secondary"/>}>
+                    startIcon={<TrackChangesIcon fontSize="small" color="secondary"/>}
+                    component={NavLink}
+                    to={'/pbkdf2'}>
                     PBKDF2
                 </Button>
                 <Button 
                     type="button" 
                     color="secondary" 
                     variant="outlined"
-                    startIcon={<LockIcon fontSize="small" color="secondary"/>}>
+                    startIcon={<LockIcon fontSize="small" color="secondary"/>}
+                    component={NavLink}
+                    to={'/encrypt'}>
                         Encrypt
                 </Button>
                 <Button 
                     type="button" 
                     color="secondary" 
                     variant="outlined"
-                    startIcon={<LockOpenIcon fontSize="small" color="secondary"/>}>
+                    startIcon={<LockOpenIcon fontSize="small" color="secondary"/>}
+                    component={NavLink}
+                    to={'/decrypt'}>
                         Decrypt
                 </Button>
 
             </ButtonGroup>
-      </header>
-      <Router>
         <Switch>
           <Route path="/" component={Home} exact/>
           <Route path="/hash" component={Hash} exact/>
