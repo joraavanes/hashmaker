@@ -5,8 +5,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
-import Container from '@material-ui/core/Container';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles(theme => ({
+    whiteFont: {
+        color: '#fff'
+    }
+}));
 
 function ElevationScroll(props) {
   const { children, window } = props;
@@ -34,13 +39,14 @@ ElevationScroll.propTypes = {
 };
 
 export default function ElevateAppBar(props) {
+    const {whiteFont} = useStyles();
   return (
     <React.Fragment>
       <CssBaseline />
       <ElevationScroll {...props}>
         <AppBar>
           <Toolbar>
-            <Typography variant="h6">Welcome to Hashmaker</Typography>
+            <Typography variant="h6" className={whiteFont}>Welcome to Hashmaker</Typography>
           </Toolbar>
         </AppBar>
       </ElevationScroll>

@@ -7,7 +7,6 @@ const Home = () => {
             <Typography 
                 variant="h6"
                 component="h2"
-                color="textSecondary"
                 align="center"
                 gutterBottom>
                 Home
