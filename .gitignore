@@ -6,3 +6,25 @@ node_modules
 yarn-error.log
 yarn-error.log
 .env
+
+# dependencies
+hashmaker-client/node_modules
+hashmaker-client/.pnp
+hashmaker-client/.pnp.js
+
+# testing
+hashmaker-client/coverage
+
+# production
+hashmaker-client/build
+
+# misc
+hashmaker-client/.DS_Store
+hashmaker-client/.env.local
+hashmaker-client/.env.development.local
+hashmaker-client/.env.test.local
+hashmaker-client/.env.production.local
+
+hashmaker-client/npm-debug.log*
+hashmaker-client/yarn-debug.log*
+hashmaker-client/yarn-error.log*
