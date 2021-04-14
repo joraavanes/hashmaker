@@ -16,8 +16,15 @@ import AppBar from './components/UI/ElevateAppBar'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core'
 import { lightBlue } from '@material-ui/core/colors'
 import './styles/App.css'
+import { create } from 'jss';
+import rtl from 'jss-rtl';
+import { StylesProvider, jssPreset } from '@material-ui/core/styles';
+
+// Configure JSS
+const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const customTheme = createMuiTheme({
+  direction: 'rtl',
   palette:{
     primary: lightBlue,
     text: {
@@ -43,6 +50,7 @@ function App() {
   const classes = useStyles();
 
   return (
+      <StylesProvider jss={jss}>
     <ThemeProvider theme={customTheme}>
       <Container className="App">
         <Router>
@@ -106,6 +114,7 @@ function App() {
         </Router>
       </Container>
     </ThemeProvider>
+      </StylesProvider>
   );
 }
 
