@@ -25,7 +25,6 @@ const Hash = () => {
     const [algorithm, setAlgorithm] = useState('SHA1');
 
     const changehandler = e => setAlgorithm(e.target.value);
-    console.log(algorithm);
 
     return (
         <Grid container spacing={3} justify="center" className={mt}>
