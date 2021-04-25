@@ -29,7 +29,7 @@ const Pbkdf2 = () => {
     return (
         <Grid container spacing={3} justify="center" className={mt}>
             <Grid item xs={12} sm={10} xl={12}>
-                <Paper className={smPadding}>
+                <Paper className={mdPadding}>
                     <Typography
                         component="h2"
                         variant="h6"
@@ -75,7 +75,27 @@ const Pbkdf2 = () => {
                                 </div>
                             </form>
                         </Grid>
-                        <Grid item xs={12} sm={6}>Output</Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                disabled
+                                variant="outlined"
+                                label="Salt"
+                                defaultValue="Salt"
+                                fullWidth
+                                multiline
+                                rows={4}
+                            />
+                            <TextField 
+                                className={mt}
+                                disabled
+                                label="Password Hash"
+                                defaultValue="Password Hash" 
+                                variant="outlined"
+                                multiline
+                                fullWidth
+                                rows={10}
+                                />
+                        </Grid>
                     </Grid>
                 </Paper>
             </Grid>
