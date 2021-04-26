@@ -33,7 +33,7 @@ const Encrypt = () => {
         <Grid container justify="center" className={mt2}>
             <Grid item xs={12} sm={10}>
                 <Paper variant="elevation" className={smPadding}>
-                    <Typography component="h2" variant="h6" align="center"> 
+                    <Typography component="h2" variant="h6" align="center" className={smPadding}> 
                         Encryption
                     </Typography>
                     <Grid container spacing={3}>
@@ -48,6 +48,8 @@ const Encrypt = () => {
                                         id="data" 
                                         value={data}
                                         onChange={e => setData(e.target.value)}
+                                        multiline
+                                        rows={5}
                                         fullWidth/>
                                 </div>
                                 <div>
@@ -79,7 +81,41 @@ const Encrypt = () => {
                                 <Button type="submit" color="primary" variant="contained" className={`${mt2} ${colorWhite}`}>Encrypt the Data</Button>
                             </form>
                         </Grid>
-                        <Grid item xs={12} sm={6}></Grid>
+                        <Grid item xs={12} sm={6}>
+                            <TextField
+                                variant="outlined"
+                                label="Algorithm"
+                                defaultValue="Algorithm"
+                                disabled
+                                fullWidth/>
+                            <TextField 
+                                className={mt1}
+                                variant="outlined" 
+                                label="Encrypted Data"
+                                defaultValue="Encrypted Data"
+                                multiline
+                                fullWidth
+                                rows={6} 
+                                disabled/>
+                            <TextField 
+                                className={mt1}
+                                variant="outlined" 
+                                label="Key"
+                                defaultValue="Key"
+                                multiline
+                                fullWidth
+                                rows={4} 
+                                disabled/>
+                            <TextField 
+                                className={mt1}
+                                variant="outlined" 
+                                label="iv"
+                                defaultValue="iv"
+                                multiline
+                                fullWidth
+                                rows={4} 
+                                disabled/>
+                        </Grid>
                     </Grid>
                 </Paper>
             </Grid>
