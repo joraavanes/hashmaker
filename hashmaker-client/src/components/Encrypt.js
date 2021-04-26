@@ -19,9 +19,15 @@ const useStyles = makeStyles(styles => ({
 const Encrypt = () => {
     const {mt1, mt2, smPadding, colorWhite} = useStyles();
 
+    const [data, setData] = useState('');
+    const [keyPassword, setKeyPassword] = useState('');
     const [algorithm, setAlgorithm] = useState('aes-128-ccm');
 
     const changeHandler = e => setAlgorithm(e.target.value);
+
+    const handleSubmit = e => {
+        e.preventDefault();
+    };
 
     return (
         <Grid container justify="center" className={mt2}>
@@ -32,12 +38,25 @@ const Encrypt = () => {
                     </Typography>
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
-                            <form noValidate autoComplete="off">
+                            <form 
+                                noValidate 
+                                autoComplete="off"
+                                onSubmit={handleSubmit}>
                                 <div>
-                                    <TextField label="Data" id="data" fullWidth/>
+                                    <TextField 
+                                        label="Data" 
+                                        id="data" 
+                                        value={data}
+                                        onChange={e => setData(e.target.value)}
+                                        fullWidth/>
                                 </div>
                                 <div>
-                                    <TextField label="Key Password" id="keyPassword" fullWidth/>
+                                    <TextField 
+                                        label="Key Password" 
+                                        id="keyPassword" 
+                                        value={keyPassword}
+                                        onChange={e => setKeyPassword(e.target.value)}
+                                        fullWidth/>
                                 </div>
                                 <div>
                                     <Select
@@ -57,7 +76,7 @@ const Encrypt = () => {
                                         <MenuItem value="aes-256-gcm">aes-256-gcm</MenuItem>
                                     </Select>
                                 </div>
-                                <Button color="primary" variant="contained" className={`${mt2} ${colorWhite}`}>Encrypt the Data</Button>
+                                <Button type="submit" color="primary" variant="contained" className={`${mt2} ${colorWhite}`}>Encrypt the Data</Button>
                             </form>
                         </Grid>
                         <Grid item xs={12} sm={6}></Grid>
