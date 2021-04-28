@@ -20,13 +20,25 @@ const Encrypt = () => {
     const {mt1, mt2, smPadding, colorWhite} = useStyles();
 
     const [data, setData] = useState('');
+    const [dataError, setDataError] = useState(false);
     const [keyPassword, setKeyPassword] = useState('');
+    const [keyError, setKeyError] = useState(false);
     const [algorithm, setAlgorithm] = useState('aes-128-ccm');
 
     const changeHandler = e => setAlgorithm(e.target.value);
 
     const handleSubmit = e => {
         e.preventDefault();
+
+        if(!data || data.length === 0)
+            setDataError(true);
+        else
+            setDataError(false);
+
+        if(!keyPassword || keyPassword.length === 0)
+            setKeyError(true);
+        else
+            setKeyError(false);
     };
 
     return (
@@ -50,6 +62,7 @@ const Encrypt = () => {
                                         onChange={e => setData(e.target.value)}
                                         multiline
                                         rows={5}
+                                        error={dataError}
                                         fullWidth/>
                                 </div>
                                 <div>
@@ -58,6 +71,7 @@ const Encrypt = () => {
                                         id="keyPassword" 
                                         value={keyPassword}
                                         onChange={e => setKeyPassword(e.target.value)}
+                                        error={keyError}
                                         fullWidth/>
                                 </div>
                                 <div>
