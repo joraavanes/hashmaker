@@ -82,7 +82,40 @@ const Decrypt = () => {
                                 </form>
 
                             </Grid>
-                            <Grid item xs={12} sm={6}></Grid>
+                            <Grid item xs={12} sm={6}>
+                                <TextField
+                                    id="decryptedData"
+                                    label="Decrypted Data"
+                                    variant="outlined"
+                                    value="Decrypted Data"
+                                    rows={6}
+                                    multiline
+                                    disabled
+                                    fullWidth
+                                />
+                                <TextField
+                                    className={mt1}
+                                    id="key"
+                                    label="Key"
+                                    variant="outlined"
+                                    value="Key"
+                                    rows={4}
+                                    multiline
+                                    disabled
+                                    fullWidth
+                                />
+                                <TextField
+                                    className={mt1}
+                                    id="iv"
+                                    label="iv"
+                                    variant="outlined"
+                                    value="iv"
+                                    rows={3}
+                                    multiline
+                                    disabled
+                                    fullWidth
+                                />
+                            </Grid>
                         </Grid>
                     </Paper>
                 </Grid>
