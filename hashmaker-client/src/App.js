@@ -15,7 +15,9 @@ import { makeStyles } from '@material-ui/core';
 import AppBar from './components/UI/ElevateAppBar'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core'
 import { lightBlue } from '@material-ui/core/colors'
+import { Provider as ReduxProvider } from 'react-redux'
 import './styles/App.css'
+import store from './state/store'
 
 const customTheme = createMuiTheme({
   palette:{
@@ -43,7 +45,8 @@ function App() {
   const classes = useStyles();
 
   return (
-    <ThemeProvider theme={customTheme}>
+    <ReduxProvider store={store}>
+      <ThemeProvider theme={customTheme}>
       <Container className="App">
         <Router>
           <AppBar/>
@@ -106,6 +109,8 @@ function App() {
         </Router>
       </Container>
     </ThemeProvider>
+    </ReduxProvider>
+    
   );
 }
 
