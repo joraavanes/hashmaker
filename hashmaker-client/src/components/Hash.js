@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import { Grid, Paper, Typography, makeStyles, TextField, Button, Select, MenuItem, FormControl, InputLabel} from '@material-ui/core'
 
 const useStyles = makeStyles(styles => ({
@@ -19,9 +20,12 @@ const useStyles = makeStyles(styles => ({
     }
 }));
 
+const cryptoSelector = state => state.crypto;
+
 const Hash = () => {
     const {mdPadding, mt, colorWhite, selectMinWidth} = useStyles();
 
+    const {loading} = useSelector(cryptoSelector);
     const [algorithm, setAlgorithm] = useState('SHA1');
 
     const changehandler = e => setAlgorithm(e.target.value);
@@ -31,7 +35,7 @@ const Hash = () => {
             <Grid item xs={12} md={10} xl={12}>
                 <Paper className={mdPadding}>
                     <Typography component="h2" variant="h5" className={mdPadding} align="center">
-                        Hash
+                        Hash - {loading.toString()}
                     </Typography>
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>

@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 export function createHMAC (plainText, algorithm){
-    return function(dispatch){
+    return function(dispatch, getState){
         dispatch(toggleLoder(true));
         
         axios.post('http://localhost:4000/', {plainText, algorithm})
@@ -14,8 +14,8 @@ export function createHMAC (plainText, algorithm){
                 
                 dispatch(toggleLoder(false));
             });
-    }
-}
+    };
+};
 
 export function toggleLoder(loading){
     return {
