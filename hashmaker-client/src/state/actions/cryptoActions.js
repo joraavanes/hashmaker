@@ -1,10 +1,10 @@
 import axios from 'axios'
 
-export function createHMAC (plainText, algorithm){
+export function createHMAC (str, algorithm){
     return function(dispatch, getState){
         dispatch(toggleLoder(true));
         
-        axios.post('http://localhost:4000/', {plainText, algorithm})
+        axios.post('http://localhost:4000/hash', {str, algorithm})
             .then(res => {
                 console.log(res.data);
                 

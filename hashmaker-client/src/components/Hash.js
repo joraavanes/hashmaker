@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Grid, Paper, Typography, makeStyles, TextField, Button, Select, MenuItem, FormControl, InputLabel, jssPreset} from '@material-ui/core'
+import { createHMAC } from '../state/actions/cryptoActions';
 
 const useStyles = makeStyles(styles => ({
     smPadding:{
@@ -26,17 +27,19 @@ const Hash = () => {
     const {mdPadding, mt, colorWhite, selectMinWidth} = useStyles();
 
     const {loading} = useSelector(cryptoSelector);
-    const [text, setText] = useState('');
+    const dispatch = useDispatch();
+    const [str, setStr] = useState('');
     const [algorithm, setAlgorithm] = useState('SHA1');
 
-    const textChangehanlder = e => setText(e.target.value);
+    const textChangehanlder = e => setStr(e.target.value);
     const algorithmChangeHanlder = e => setAlgorithm(e.target.value);
 
     const handleFormSubmit = e => {
         e.preventDefault();
 
-        console.log(e.target.str.value);
+        console.log(str);
         console.log(algorithm);
+        dispatch(createHMAC(str, algorithm));
     };
 
     return (
@@ -54,7 +57,7 @@ const Hash = () => {
                                     id="str" 
                                     label="Plain text" 
                                     fullWidth
-                                    value={text}
+                                    value={str}
                                     onChange={textChangehanlder}
                                 />
                             </div>
