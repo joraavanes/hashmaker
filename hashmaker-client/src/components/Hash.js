@@ -1,6 +1,6 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { Grid, Paper, Typography, makeStyles, TextField, Button, Select, MenuItem, FormControl, InputLabel, jssPreset} from '@material-ui/core'
+import { Grid, Paper, Typography, makeStyles, TextField, Button, Select, MenuItem, FormControl, InputLabel} from '@material-ui/core'
 import { createHMAC } from '../state/actions/cryptoActions';
 
 const useStyles = makeStyles(styles => ({
@@ -25,11 +25,16 @@ const cryptoSelector = state => state.crypto;
 
 const Hash = () => {
     const {mdPadding, mt, colorWhite, selectMinWidth} = useStyles();
-
-    const {loading} = useSelector(cryptoSelector);
-    const dispatch = useDispatch();
+    
+    // Component states
     const [str, setStr] = useState('');
     const [algorithm, setAlgorithm] = useState('SHA1');
+
+    // Redux state selector
+    const crypto = useSelector(cryptoSelector);
+
+    // Dispatcher
+    const dispatch = useDispatch();
 
     const textChangehanlder = e => setStr(e.target.value);
     const algorithmChangeHanlder = e => setAlgorithm(e.target.value);
@@ -37,10 +42,10 @@ const Hash = () => {
     const handleFormSubmit = e => {
         e.preventDefault();
 
-        console.log(str);
-        console.log(algorithm);
         dispatch(createHMAC(str, algorithm));
     };
+
+    useEffect(()=>{}, []);
 
     return (
         <Grid container spacing={3} justify="center" className={mt}>
@@ -89,8 +94,9 @@ const Hash = () => {
                             disabled
                             id="outlined-disabled"
                             label="Output"
-                            defaultValue="Hashed output"
+                            defaultValue='Hashed output'
                             variant="outlined"
+                            value={crypto.hmac && crypto.hmac.hash}
                             fullWidth
                             multiline
                             rows={10}

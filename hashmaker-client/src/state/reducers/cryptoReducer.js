@@ -1,7 +1,11 @@
 /* eslint-disable import/no-anonymous-default-export */
 
 const cryptoDefaultState = {
-    loading: false
+    loading: false,
+    hmac: {},
+    pbkdf2: {},
+    encrypt: {},
+    decrypt: {}
 };
 
 export default function(state = cryptoDefaultState, action){
