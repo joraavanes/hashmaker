@@ -6,8 +6,15 @@ export function createHMAC (str, algorithm){
         
         axios.post('http://localhost:4000/hash', {str, algorithm})
             .then(res => {
-                console.log(res.data);
-                
+                const {hash, algorithm, plainText} = res.data;
+                dispatch({
+                    type: 'HMAC',
+                    hmac:{
+                        hash,
+                        algorithm,
+                        plainText
+                    }
+                });
                 dispatch(toggleLoder(false));
             })
             .catch(err=> {
