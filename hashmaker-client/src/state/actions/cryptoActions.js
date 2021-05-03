@@ -24,6 +24,12 @@ export function createHMAC (str, algorithm){
     };
 };
 
+export function clearAll(){
+    return {
+        type: 'CLEAR_ALL'
+    };
+};
+
 export function toggleLoder(loading){
     return {
         type: 'LOADING',
