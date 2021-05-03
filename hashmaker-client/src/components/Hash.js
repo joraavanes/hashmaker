@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { Grid, Paper, Typography, makeStyles, TextField, Button, Select, MenuItem, FormControl, InputLabel} from '@material-ui/core'
-import { createHMAC } from '../state/actions/cryptoActions';
+import { clearAll, createHMAC } from '../state/actions/cryptoActions';
 
 const useStyles = makeStyles(styles => ({
     smPadding:{
@@ -45,7 +45,14 @@ const Hash = () => {
         dispatch(createHMAC(str, algorithm));
     };
 
-    useEffect(()=>{}, []);
+    useEffect(
+        ()=>{
+
+            return () => {
+                dispatch(clearAll());
+            };
+        }
+    ,[]);
 
     return (
         <Grid container spacing={3} justify="center" className={mt}>
