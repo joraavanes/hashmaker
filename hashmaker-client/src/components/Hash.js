@@ -90,17 +90,36 @@ const Hash = () => {
                         </form>
                         </Grid>
                         <Grid item xs={12} sm={6}>
-                        <TextField
-                            disabled
-                            id="outlined-disabled"
-                            label="Output"
-                            defaultValue='Hashed output'
-                            variant="outlined"
-                            value={crypto.hmac && crypto.hmac.hash}
-                            fullWidth
-                            multiline
-                            rows={10}
-                        />
+                            <TextField
+                                label="Plain text"
+                                defaultValue="Plain text"
+                                value={crypto.hmac && crypto.hmac.plainText}
+                                variant="outlined"
+                                fullWidth
+                                disabled
+                                multiline
+                                rows={2}
+                            />
+                            <TextField
+                                label="Algorithm"
+                                defaultValue="Algorithm"
+                                variant="outlined"
+                                value={crypto.hmac && crypto.hmac.algorithm}
+                                className={mt}
+                                disabled
+                            />
+                            <TextField
+                                disabled
+                                id="outlined-disabled"
+                                label="Output"
+                                defaultValue='Hashed output'
+                                variant="outlined"
+                                value={crypto.hmac && crypto.hmac.hash}
+                                fullWidth
+                                multiline
+                                rows={10}
+                                className={mt}
+                            />
                         </Grid>
                     </Grid>
                     
