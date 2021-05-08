@@ -30,11 +30,12 @@ export function pbkdf2(password, iterations, keylen, algorithm){
 
         try {
             const res = await axios.post('http://localhost:4000/pbkdf2', {password, iterations, keylen, algorithm});
-            const {pbkdf2Password} = res.data;
+            const {pbkdf2Password, salt} = res.data;
             dispatch({
                 type: 'PBKDF2',
                 pbkdf2:{
-                    pbkdf2Password
+                    pbkdf2Password,
+                    salt
                 }
             });
 

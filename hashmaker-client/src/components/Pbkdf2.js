@@ -99,6 +99,7 @@ const Pbkdf2 = () => {
                                 fullWidth
                                 multiline
                                 rows={4}
+                                value={crypto.pbkdf2.salt}
                             />
                             <TextField 
                                 className={mt}
