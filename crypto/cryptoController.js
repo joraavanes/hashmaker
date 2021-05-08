@@ -12,10 +12,11 @@ module.exports = {
     },
     pbkdf2: (req, res, next) => {
         const {password, iterations, keylen, algorithm} = req.body;
-        const hashedPassword = PBKDF2(password,iterations,keylen, algorithm);
+        const {hashedPassword, salt} = PBKDF2(password,iterations,keylen, algorithm);
         res.send({
             pbkdf2Password: hashedPassword,
             plainStr: password,
+            salt,
             iterations,
             keylen,
             algorithm
