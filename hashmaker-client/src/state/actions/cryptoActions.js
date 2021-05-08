@@ -47,6 +47,28 @@ export function pbkdf2(password, iterations, keylen, algorithm){
     };
 };
 
+export function encrypt(){
+    return async function(dispatch, getState){
+        dispatch(toggleLoader(true));
+
+        try {
+            const {encryptedData, key, iv} = await axios.post('http://localhost:4000/encrypt', {});
+            dispatch({
+                type: 'ENCRYPT',
+                encrypt: {
+                    encryptedData,
+                    key,
+                    iv
+                }
+            });
+
+            dispatch(toggleLoader(false));
+        } catch (err) {
+            dispatch(toggleLoader(false));
+        }
+    }
+};
+
 export function clearAll(){
     return {
         type: 'CLEAR_ALL'

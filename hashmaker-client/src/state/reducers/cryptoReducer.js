@@ -21,6 +21,11 @@ export default function(state = cryptoDefaultState, action){
                 ...state,
                 pbkdf2: action.pbkdf2
             };
+        case 'ENCRYPT':
+            return{
+                ...state,
+                encrypt:action.encrypt
+            };
         case 'CLEAR_ALL':
             return{
                 ...state,
