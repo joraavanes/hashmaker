@@ -16,6 +16,11 @@ export default function(state = cryptoDefaultState, action){
                 hmac: action.hmac,
                 loading: action.loading
             };
+        case 'PBKDF2':
+            return{
+                ...state,
+                pbkdf2: action.pbkdf2
+            };
         case 'CLEAR_ALL':
             return{
                 ...state,
@@ -28,7 +33,7 @@ export default function(state = cryptoDefaultState, action){
             return{
                 ...state,
                 loading: action.loading
-            }        
+            };
         default:
             return state;
         
