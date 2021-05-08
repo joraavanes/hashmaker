@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Grid, makeStyles, Paper, Typography, FormControl, TextField, InputLabel, Select, MenuItem, Button } from '@material-ui/core'
+import { pbkdf2 } from '../state/actions/cryptoActions';
 
 const useStyles = makeStyles(styles => ({
     smPadding:{
@@ -19,17 +21,24 @@ const useStyles = makeStyles(styles => ({
     }
 }));
 
+const cryptoSelector = state => state.crypto;
+
 const Pbkdf2 = () => {
     const {mt, smPadding, mdPadding, selectMinWidth, colorWhite} = useStyles();
+
+    const dispatch = useDispatch();
 
     const [plainPassword, setPlainPassword] = useState('');
     const [iterations, setIterations] = useState(0);
     const [keylen, setKeylen] = useState(0);
     const [algorithm, setAlgorithm] = useState('SHA1');
 
+    const crypto = useSelector(cryptoSelector);
+
     const handleFormSubmit = e => {
         e.preventDefault();
 
+        dispatch(pbkdf2(plainPassword, iterations, keylen, algorithm));
     };
 
     return (
@@ -52,10 +61,10 @@ const Pbkdf2 = () => {
                                     <TextField id="password" label="Plain Password" fullWidth onChange={e=> setPlainPassword(e.target.value)} value={plainPassword}/>
                                 </div>
                                 <div>
-                                    <TextField type="number" id="iterations" label="Iterations" fullWidth onChange={e => setIterations(e.target.value)} value={iterations}/>
+                                    <TextField type="number" id="iterations" label="Iterations" fullWidth onChange={e => setIterations(Number(e.target.value))} value={iterations}/>
                                 </div>
                                 <div>
-                                    <TextField type="number" id="keylen" label="Keylen" fullWidth onChange={e => setKeylen(e.target.value)} value={keylen}/>
+                                    <TextField type="number" id="keylen" label="Keylen" fullWidth onChange={e => setKeylen(Number(e.target.value))} value={keylen}/>
                                 </div>
                                 <div>
                                     <FormControl className={mt}>
@@ -97,6 +106,7 @@ const Pbkdf2 = () => {
                                 label="Password Hash"
                                 defaultValue="Password Hash" 
                                 variant="outlined"
+                                value={crypto.pbkdf2.pbkdf2Password}
                                 multiline
                                 fullWidth
                                 rows={10}
