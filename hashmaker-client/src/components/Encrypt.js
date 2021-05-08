@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Grid, Paper, Typography, TextField, makeStyles, Button, Select, MenuItem, FormControl,  } from '@material-ui/core'
+import { encrypt } from '../state/actions/cryptoActions'
 
 const useStyles = makeStyles(styles => ({
     mt1:{
@@ -19,13 +21,15 @@ const useStyles = makeStyles(styles => ({
 const Encrypt = () => {
     const {mt1, mt2, smPadding, colorWhite} = useStyles();
 
+    const dispatch = useDispatch();
+
     const [data, setData] = useState('');
     const [dataError, setDataError] = useState(false);
     const [keyPassword, setKeyPassword] = useState('');
     const [keyError, setKeyError] = useState(false);
     const [algorithm, setAlgorithm] = useState('aes-128-ccm');
 
-    const changeHandler = e => setAlgorithm(e.target.value);
+    const crypto = useSelector(state => state.crypto);
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -39,6 +43,8 @@ const Encrypt = () => {
             setKeyError(true);
         else
             setKeyError(false);
+
+        dispatch(encrypt(algorithm, keyPassword, data));
     };
 
     return (
@@ -80,7 +86,7 @@ const Encrypt = () => {
                                         label="algorithm"
                                         id="algorithm"
                                         value={algorithm}
-                                        onChange={changeHandler}
+                                        onChange={e => setAlgorithm(e.target.value)}
                                         fullWidth
                                         className={mt1}
                                     >
@@ -88,6 +94,7 @@ const Encrypt = () => {
                                         <MenuItem value="aes-128-gcm">aes-128-gcm</MenuItem>
                                         <MenuItem value="aes-192-ccm">aes-192-ccm</MenuItem>
                                         <MenuItem value="aes-192-gcm">aes-192-gcm</MenuItem>
+                                        <MenuItem value="aes-256-cbc">aes-256-cbc</MenuItem>
                                         <MenuItem value="aes-256-ccm">aes-256-ccm</MenuItem>
                                         <MenuItem value="aes-256-gcm">aes-256-gcm</MenuItem>
                                     </Select>
@@ -100,6 +107,7 @@ const Encrypt = () => {
                                 variant="outlined"
                                 label="Algorithm"
                                 defaultValue="Algorithm"
+                                value={crypto.encrypt.algorithm}
                                 disabled
                                 fullWidth/>
                             <TextField 
@@ -107,6 +115,7 @@ const Encrypt = () => {
                                 variant="outlined" 
                                 label="Encrypted Data"
                                 defaultValue="Encrypted Data"
+                                value={crypto.encrypt.encryptedData}
                                 multiline
                                 fullWidth
                                 rows={6} 
@@ -116,6 +125,7 @@ const Encrypt = () => {
                                 variant="outlined" 
                                 label="Key"
                                 defaultValue="Key"
+                                value={crypto.encrypt.key}
                                 multiline
                                 fullWidth
                                 rows={4} 
@@ -125,6 +135,7 @@ const Encrypt = () => {
                                 variant="outlined" 
                                 label="iv"
                                 defaultValue="iv"
+                                value={crypto.encrypt.iv}
                                 multiline
                                 fullWidth
                                 rows={4} 
