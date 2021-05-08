@@ -47,18 +47,21 @@ export function pbkdf2(password, iterations, keylen, algorithm){
     };
 };
 
-export function encrypt(){
+export function encrypt(algorithm, keyPassword, data){
     return async function(dispatch, getState){
         dispatch(toggleLoader(true));
 
         try {
-            const {encryptedData, key, iv} = await axios.post('http://localhost:4000/encrypt', {});
+            const res = await axios.post('http://localhost:4000/cipheriv', {algorithm, keyPassword, data});
+            const {encryptedData, key, iv} = res.data
+            
             dispatch({
                 type: 'ENCRYPT',
                 encrypt: {
                     encryptedData,
                     key,
-                    iv
+                    iv,
+                    algorithm
                 }
             });
 
