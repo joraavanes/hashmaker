@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid, makeStyles, Paper, Typography, FormControl, TextField, InputLabel, Select, MenuItem, Button } from '@material-ui/core'
-import { pbkdf2 } from '../state/actions/cryptoActions';
+import { clearAll, pbkdf2 } from '../state/actions/cryptoActions';
 
 const useStyles = makeStyles(styles => ({
     smPadding:{
@@ -34,6 +34,13 @@ const Pbkdf2 = () => {
     const [algorithm, setAlgorithm] = useState('SHA1');
 
     const crypto = useSelector(cryptoSelector);
+
+    useEffect(() => {
+        
+        return () => {
+            dispatch(clearAll());
+        }
+    }, []);
 
     const handleFormSubmit = e => {
         e.preventDefault();

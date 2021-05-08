@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Grid, Paper, Typography, TextField, makeStyles, Button, Select, MenuItem, FormControl,  } from '@material-ui/core'
-import { encrypt } from '../state/actions/cryptoActions'
+import { clearAll, encrypt } from '../state/actions/cryptoActions'
 
 const useStyles = makeStyles(styles => ({
     mt1:{
@@ -30,6 +30,13 @@ const Encrypt = () => {
     const [algorithm, setAlgorithm] = useState('aes-128-ccm');
 
     const crypto = useSelector(state => state.crypto);
+
+    useEffect(() => {
+        
+        return () => {
+            dispatch(clearAll());
+        }
+    }, []);
 
     const handleSubmit = e => {
         e.preventDefault();
