@@ -22,9 +22,15 @@ const useStyles = makeStyles(styles => ({
 const Pbkdf2 = () => {
     const {mt, smPadding, mdPadding, selectMinWidth, colorWhite} = useStyles();
 
+    const [plainPassword, setPlainPassword] = useState('');
+    const [iterations, setIterations] = useState(0);
+    const [keylen, setKeylen] = useState(0);
     const [algorithm, setAlgorithm] = useState('SHA1');
 
-    const changeHandler = e => setAlgorithm(e.target.value);
+    const handleFormSubmit = e => {
+        e.preventDefault();
+
+    };
 
     return (
         <Grid container spacing={3} justify="center" className={mt}>
@@ -41,15 +47,15 @@ const Pbkdf2 = () => {
                     </Typography>
                     <Grid container spacing={3}>
                         <Grid item xs={12} sm={6}>
-                            <form autoComplete="off" noValidate>
+                            <form autoComplete="off" onSubmit={handleFormSubmit} noValidate>
                                 <div>
-                                    <TextField id="password" label="Plain Password" fullWidth/>
+                                    <TextField id="password" label="Plain Password" fullWidth onChange={e=> setPlainPassword(e.target.value)} value={plainPassword}/>
                                 </div>
                                 <div>
-                                    <TextField id="iterations" label="Iterations" fullWidth/>
+                                    <TextField type="number" id="iterations" label="Iterations" fullWidth onChange={e => setIterations(e.target.value)} value={iterations}/>
                                 </div>
                                 <div>
-                                    <TextField id="keylen" label="Keylen" fullWidth/>
+                                    <TextField type="number" id="keylen" label="Keylen" fullWidth onChange={e => setKeylen(e.target.value)} value={keylen}/>
                                 </div>
                                 <div>
                                     <FormControl className={mt}>
@@ -61,7 +67,7 @@ const Pbkdf2 = () => {
                                             fullWidth
                                             className={selectMinWidth}
                                             value={algorithm}
-                                            onChange={changeHandler}
+                                            onChange={e => setAlgorithm(e.target.value)}
                                         >
                                             <MenuItem value="SHA1">SHA1</MenuItem>
                                             <MenuItem value="SHA256">SHA256</MenuItem>
@@ -71,7 +77,7 @@ const Pbkdf2 = () => {
                                     </FormControl>
                                 </div>
                                 <div>
-                                    <Button color="primary" variant="contained" className={`${mt} ${colorWhite}`}>Generate PBKDF2</Button>
+                                    <Button type="submit" color="primary" variant="contained" className={`${mt} ${colorWhite}`}>Generate PBKDF2</Button>
                                 </div>
                             </form>
                         </Grid>
