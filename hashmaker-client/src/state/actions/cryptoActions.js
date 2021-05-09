@@ -72,6 +72,27 @@ export function encrypt(algorithm, keyPassword, data){
     }
 };
 
+export function decrypt(algorithm, key, iv, encryptedData){
+    return async function(dispatch, getState){
+        dispatch(toggleLoader(true));
+
+        try {
+            const res = await axios.post('http://localhost:4000/decrypt', {algorithm, key, iv, encryptedData});
+            const { decryptedData } = res.data;
+
+            dispatch({
+                type: 'DECRYPT',
+                decrypt:{
+                    decryptedData
+                }
+            });
+            dispatch(toggleLoader(false));
+        } catch (err) {
+            dispatch(toggleLoader(false));
+        }
+    };
+};
+
 export function clearAll(){
     return {
         type: 'CLEAR_ALL'

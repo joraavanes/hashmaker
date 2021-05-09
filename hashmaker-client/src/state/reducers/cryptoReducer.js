@@ -26,6 +26,11 @@ export default function(state = cryptoDefaultState, action){
                 ...state,
                 encrypt:action.encrypt
             };
+        case 'DECRYPT':
+            return{
+                ...state,
+                decrypt: action.decrypt
+            };
         case 'CLEAR_ALL':
             return{
                 ...state,
