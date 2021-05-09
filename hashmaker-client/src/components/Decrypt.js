@@ -19,9 +19,10 @@ const useStyles = makeStyles(styles => ({
 const Decrypt = () => {
     const {mt1, mt2, smPadding, colorWhite} = useStyles();
 
+    const [encryptedData, setEncryptedData] = useState('');
+    const [key, setKey] = useState('');
+    const [iv, setIv] = useState('');
     const [algorithm, setAlgorithm] = useState('aes-128-ccm');
-
-    const changeHandler = e => setAlgorithm(e.target.value);
 
     const handleSubmit = e => {
         e.preventDefault();
@@ -49,25 +50,31 @@ const Decrypt = () => {
                                         fullWidth
                                         multiline
                                         rows={5}
+                                        value={encryptedData}
+                                        onChange={e => setEncryptedData(e.target.value)}
                                     />
                                     <TextField
                                         id="key"
                                         variant="standard"
                                         label="Key"
                                         fullWidth
+                                        value={key}
+                                        onChange={e => setKey(e.target.value)}
                                     />
                                     <TextField
                                         id="iv"
                                         variant="standard"
                                         label="iv"
                                         fullWidth
+                                        value={iv}
+                                        onChange={e => setIv(e.target.value)}
                                     />
                                     <Select
                                         labelId="algorithm"
                                         label="algorithm"
                                         id="algorithm"
                                         value={algorithm}
-                                        onChange={changeHandler}
+                                        onChange={e => setAlgorithm(e.target.value)}
                                         fullWidth
                                         className={mt1}
                                     >
