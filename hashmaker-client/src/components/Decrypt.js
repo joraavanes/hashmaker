@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { Grid, Typography, Paper, TextField, makeStyles, MenuItem, Select, Button } from '@material-ui/core'
+import { decrypt } from '../state/actions/cryptoActions';
 
 const useStyles = makeStyles(styles => ({
     mt1:{
@@ -14,10 +16,12 @@ const useStyles = makeStyles(styles => ({
     colorWhite:{
         color: '#fff'
     }
-}))
+}));
 
 const Decrypt = () => {
     const {mt1, mt2, smPadding, colorWhite} = useStyles();
+
+    const dispatch = useDispatch();
 
     const [encryptedData, setEncryptedData] = useState('');
     const [key, setKey] = useState('');
@@ -26,6 +30,8 @@ const Decrypt = () => {
 
     const handleSubmit = e => {
         e.preventDefault();
+
+        dispatch(decrypt(algorithm, key, iv, encryptedData));
     }
 
     return (
@@ -82,6 +88,7 @@ const Decrypt = () => {
                                         <MenuItem value="aes-128-gcm">aes-128-gcm</MenuItem>
                                         <MenuItem value="aes-192-ccm">aes-192-ccm</MenuItem>
                                         <MenuItem value="aes-192-gcm">aes-192-gcm</MenuItem>
+                                        <MenuItem value="aes-256-cbc">aes-256-cbc</MenuItem>
                                         <MenuItem value="aes-256-ccm">aes-256-ccm</MenuItem>
                                         <MenuItem value="aes-256-gcm">aes-256-gcm</MenuItem>
                                     </Select>

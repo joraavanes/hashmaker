@@ -77,7 +77,7 @@ export function decrypt(algorithm, key, iv, encryptedData){
         dispatch(toggleLoader(true));
 
         try {
-            const res = await axios.post('http://localhost:4000/decrypt', {algorithm, key, iv, encryptedData});
+            const res = await axios.post('http://localhost:4000/decipheriv', {algorithm, key, iv, encryptedData});
             const { decryptedData } = res.data;
 
             dispatch({
