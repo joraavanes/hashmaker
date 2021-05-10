@@ -28,6 +28,8 @@ const Decrypt = () => {
     const [iv, setIv] = useState('');
     const [algorithm, setAlgorithm] = useState('aes-128-ccm');
 
+    const crypto = useSelector(state => state.crypto);
+
     const handleSubmit = e => {
         e.preventDefault();
 
@@ -101,7 +103,8 @@ const Decrypt = () => {
                                     id="decryptedData"
                                     label="Decrypted Data"
                                     variant="outlined"
-                                    value="Decrypted Data"
+                                    defaultValue="Decrypted Data"
+                                    value={crypto.decrypt.decryptedData}
                                     rows={6}
                                     multiline
                                     disabled
@@ -112,7 +115,8 @@ const Decrypt = () => {
                                     id="key"
                                     label="Key"
                                     variant="outlined"
-                                    value="Key"
+                                    defaultValue="Key"
+                                    value={crypto.decrypt.key}
                                     rows={4}
                                     multiline
                                     disabled
@@ -123,7 +127,8 @@ const Decrypt = () => {
                                     id="iv"
                                     label="iv"
                                     variant="outlined"
-                                    value="iv"
+                                    defaultValue="iv"
+                                    value={crypto.decrypt.iv}
                                     rows={3}
                                     multiline
                                     disabled

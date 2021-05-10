@@ -83,7 +83,9 @@ export function decrypt(algorithm, key, iv, encryptedData){
             dispatch({
                 type: 'DECRYPT',
                 decrypt:{
-                    decryptedData
+                    decryptedData,
+                    key,
+                    iv
                 }
             });
             dispatch(toggleLoader(false));
