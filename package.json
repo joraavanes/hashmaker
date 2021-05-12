@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node bin/www/",
     "dev": "nodemon bin/www/",
-    "build": "npm run bulid --prefix hashmaker-client"
+    "client:install": "npm run install --prefix hashmaker-client",
+    "build": "npm run build --prefix hashmaker-client"
   },
   "engines": {
     "node": "14.15.1"
