@@ -7,7 +7,7 @@
     "start": "node bin/www/",
     "dev": "nodemon bin/www/",
     "client:install": "npm run client:install --prefix hashmaker-client",
-    "build": "npm run build --prefix hashmaker-client"
+    "build:react": "npm run build --prefix hashmaker-client"
   },
   "engines": {
     "node": "14.15.1"
