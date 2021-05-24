@@ -1,10 +1,12 @@
 import axios from 'axios'
 
+const url = process.env.NODE_ENV == 'production' ? '' : 'http://localhost:4000';
+
 export function createHMAC (str, algorithm){
     return function(dispatch, getState){
         dispatch(toggleLoader(true));
         
-        axios.post('http://localhost:4000/hash', {str, algorithm})
+        axios.post(`${url}/hash`, {str, algorithm})
             .then(res => {
                 const {hash, algorithm, plainText} = res.data;
                 dispatch({
@@ -29,7 +31,7 @@ export function pbkdf2(password, iterations, keylen, algorithm){
         dispatch(toggleLoader(true));
 
         try {
-            const res = await axios.post('http://localhost:4000/pbkdf2', {password, iterations, keylen, algorithm});
+            const res = await axios.post(`${url}/pbkdf2`, {password, iterations, keylen, algorithm});
             const {pbkdf2Password, salt} = res.data;
             dispatch({
                 type: 'PBKDF2',
@@ -52,7 +54,7 @@ export function encrypt(algorithm, keyPassword, data){
         dispatch(toggleLoader(true));
 
         try {
-            const res = await axios.post('http://localhost:4000/cipheriv', {algorithm, keyPassword, data});
+            const res = await axios.post(`${url}/cipheriv`, {algorithm, keyPassword, data});
             const {encryptedData, key, iv} = res.data
             
             dispatch({
@@ -77,7 +79,7 @@ export function decrypt(algorithm, key, iv, encryptedData){
         dispatch(toggleLoader(true));
 
         try {
-            const res = await axios.post('http://localhost:4000/decipheriv', {algorithm, key, iv, encryptedData});
+            const res = await axios.post(`${url}/decipheriv`, {algorithm, key, iv, encryptedData});
             const { decryptedData } = res.data;
 
             dispatch({
